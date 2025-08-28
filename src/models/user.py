@@ -11,4 +11,4 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
-    
+    is_verified = Column(Boolean, default=False)

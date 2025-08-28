@@ -6,8 +6,12 @@ from models.notes import Note
 from schemas.notes import NoteCreate, NoteOut, NoteUpdate
 from src.common.connection import db_dependency
 
-def create_note(note: NoteCreate, db: db_dependency):
-    db_note = Note(**note.dict())
+def create_note(note: NoteCreate, user_id:int ,db: db_dependency):
+    db_note = Note(
+        title = note.title,
+        user_id = user_id,
+        folder_id = note.folder_id,
+    )
     db.add(db_note)
     db.commit()
     db.refresh(db_note)

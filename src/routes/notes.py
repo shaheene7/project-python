@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from datetime import datetime
 from src.controllers import notes as notes_contoller
-from src.common import db_dependency
+from src.common.connection import db_dependency
 from models import Note
 from schemas import NoteCreate, NoteUpdate, NoteOut
 
@@ -11,9 +11,9 @@ from schemas import NoteCreate, NoteUpdate, NoteOut
 router = APIRouter(prefix="/notes", tags=["Notes"])
 
 
-@router.post("/", response_model=NoteOut)
-def create_note(note: NoteCreate, db: db_dependency):
-  return notes_contoller.create_note(note, db)
+@router.post("/{user_id}", response_model=NoteOut)
+def create_note(note: NoteCreate, user_id:int ,db: db_dependency):
+  return notes_contoller.create_note(note, user_id ,db)
 
 @router.get("/", response_model=list[NoteOut])
 def get_notes(db: db_dependency):

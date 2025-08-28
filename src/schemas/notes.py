@@ -7,7 +7,7 @@ class NoteBase(BaseModel):
     title: str
     content: str
     folder_id: int | None = None
-    tags: list[str] | None = []
+    tags: Optional[list[str]] = None
 
 class NoteCreate(NoteBase):
     pass
@@ -26,3 +26,6 @@ class NoteOut(NoteBase):
     is_deleted: bool
     created_at: datetime
     updated_at: datetime
+
+    class Config:
+        orm_mode = True
