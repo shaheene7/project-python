@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 from typing import Annotated
+from dotenv import load_dotenv
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
@@ -7,9 +8,11 @@ import os
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
+load_dotenv()
 
 
-engine = create_engine(os.getenv("DB_URL"), pool_size=20, max_overflow=0)
+
+engine = create_engine(os.getenv("DB_URL"))
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -37,6 +40,7 @@ def get_db_context():
         db.close()
 
 
-db_dependency = Annotated[Session, Depends(get_db)]
+
 
 Base = declarative_base()
+db_dependency = Annotated[Session, Depends(get_db)]

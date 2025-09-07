@@ -5,18 +5,18 @@ from pydantic import BaseModel
 
 class NoteBase(BaseModel):
     title: str
-    content: str
     folder_id: int | None = None
     tags: Optional[list[str]] = None
 
 class NoteCreate(NoteBase):
-    pass
+    content: str
 
 class NoteUpdate(BaseModel):
     title: Optional[str] = None
     content: Optional[str] = None
     folder_id: Optional[int] = None
     tags: Optional[list[str]] = None
+    is_deleted: Optional[bool] = None
 
 
 
@@ -28,4 +28,4 @@ class NoteOut(NoteBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True  

@@ -13,7 +13,7 @@ class RevisionCreate(RevisionBase):
 
 class RevisionOut(RevisionBase):
     id: int
-    user_id: int
+    created_by: int
     created_at: datetime
 
     class Config:

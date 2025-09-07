@@ -12,7 +12,7 @@ class GrammarIssue(Base):
     position = Column(Integer, nullable=False)
     length = Column(Integer, nullable=False)
     issue_type = Column(Enum("spelling", "grammar", "punctuation", "style", name="issue_types"), nullable=False)
-    message = Column(String, nullable=False)
+    message = Column(String)
     suggestion = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     
